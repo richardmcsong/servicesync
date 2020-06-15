@@ -1,0 +1,21 @@
+{{- if .Values.rbac.create }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+ name: gial-services-admin
+rules:
+- apiGroups: [""]
+  resources:
+   - services
+   - services/proxy
+   - endpoints
+  verbs:
+   - create
+   - delete
+   - deletecollection
+   - get
+   - list
+   - patch
+   - update
+   - watch
+{{- end }}

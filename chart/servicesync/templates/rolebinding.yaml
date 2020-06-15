@@ -1,0 +1,14 @@
+{{- if .Values.rbac.create }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ include "servicesync.name" . }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: gial-services-admin
+subjects:
+  - kind: ServiceAccount
+    name: {{ template "servicesync.serviceAccountName" . }}
+    namespace: {{ .Release.Namespace }}
+{{- end }}
